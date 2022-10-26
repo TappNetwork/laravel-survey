@@ -3,13 +3,21 @@
 namespace MattDaneshvar\Survey\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use MattDaneshvar\Survey\Contracts\Answer;
 use MattDaneshvar\Survey\Contracts\Question as QuestionContract;
 use MattDaneshvar\Survey\Contracts\Section;
 use MattDaneshvar\Survey\Contracts\Survey;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
+use Spatie\Translatable\HasTranslations;
 
-class Question extends Model implements QuestionContract
+class Question extends Model implements QuestionContract, Sortable
 {
+    use HasTranslations;
+    use SortableTrait;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,7 +27,11 @@ class Question extends Model implements QuestionContract
 
     protected $casts = [
         'rules' => 'array',
-        'options' => 'array',
+    ];
+
+    public $translatable = [
+        'content',
+        'options',
     ];
 
     /**
@@ -55,12 +67,17 @@ class Question extends Model implements QuestionContract
         parent::__construct($attributes);
     }
 
+    public function buildSortQuery()
+    {
+        return static::query()->where('survey_id', $this->survey_id);
+    }
+
     /**
      * The survey the question belongs to.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function survey()
+    public function survey(): BelongsTo
     {
         return $this->belongsTo(get_class(app()->make(Survey::class)));
     }
@@ -70,7 +87,7 @@ class Question extends Model implements QuestionContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function section()
+    public function section(): BelongsTo
     {
         return $this->belongsTo(get_class(app()->make(Section::class)));
     }
@@ -80,7 +97,7 @@ class Question extends Model implements QuestionContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function answers()
+    public function answers(): HasMany
     {
         return $this->hasMany(get_class(app()->make(Answer::class)));
     }

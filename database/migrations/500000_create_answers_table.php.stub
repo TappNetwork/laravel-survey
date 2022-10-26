@@ -14,11 +14,15 @@ class CreateAnswersTable extends Migration
     public function up()
     {
         Schema::create(config('survey.database.tables.answers'), function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('question_id');
-            $table->unsignedInteger('entry_id')->nullable();
+            $table->id();
+            $table->foreignId('question_id')->constrained();
+            $table->foreignId('entry_id')->nullable()->constrained();
             $table->string('value');
             $table->timestamps();
+
+            $table->index('question_id');
+            $table->index('entry_id');
+            $table->index('value');
         });
     }
 

@@ -3,13 +3,21 @@
 namespace MattDaneshvar\Survey\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use MattDaneshvar\Survey\Contracts\Entry;
 use MattDaneshvar\Survey\Contracts\Question;
 use MattDaneshvar\Survey\Contracts\Section;
 use MattDaneshvar\Survey\Contracts\Survey as SurveyContract;
+use Spatie\Translatable\HasTranslations;
 
 class Survey extends Model implements SurveyContract
 {
+    use HasTranslations;
+
+    public $translatable = [
+        'name',
+    ];
+
     /**
      * Survey constructor.
      *
@@ -45,7 +53,7 @@ class Survey extends Model implements SurveyContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function sections()
+    public function sections(): HasMany
     {
         return $this->hasMany(get_class(app()->make(Section::class)));
     }
@@ -55,7 +63,7 @@ class Survey extends Model implements SurveyContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function questions()
+    public function questions(): HasMany
     {
         return $this->hasMany(get_class(app()->make(Question::class)));
     }
@@ -65,7 +73,7 @@ class Survey extends Model implements SurveyContract
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function entries()
+    public function entries(): HasMany
     {
         return $this->hasMany(get_class(app()->make(Entry::class)));
     }
