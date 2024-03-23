@@ -17,7 +17,7 @@ class Entry extends Model implements EntryContract
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = ['survey_id', 'participant_id'];
 

@@ -35,18 +35,21 @@ class Survey extends Model implements SurveyContract
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = ['name', 'settings'];
 
     /**
-     * The attributes that should be casted.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = [
-        'settings' => 'array',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'settings' => 'array',
+        ];
+    }
 
     /**
      * The survey sections.

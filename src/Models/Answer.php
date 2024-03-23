@@ -30,7 +30,7 @@ class Answer extends Model implements AnswerContract
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = ['value', 'question_id', 'entry_id'];
 

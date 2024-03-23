@@ -21,7 +21,7 @@ class Question extends Model implements QuestionContract, Sortable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'type',
@@ -32,9 +32,17 @@ class Question extends Model implements QuestionContract, Sortable
         'section_id',
     ];
 
-    protected $casts = [
-        'rules' => 'array',
-    ];
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'rules' => 'array',
+        ];
+    }
 
     public $translatable = [
         'content',
