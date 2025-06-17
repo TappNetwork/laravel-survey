@@ -14,17 +14,18 @@
     }
   ],
   "require": {
-    "php":"^8.0",
-    "illuminate/database": "^9.0",
-    "spatie/laravel-translatable": "^6.0"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^9.0",
-    "orchestra/testbench": "^7.7",
-    "illuminate/http": ">=6",
-    "mockery/mockery": "^1.4",
-    "laravel/legacy-factories": "^1.1"
-  },
+        "php": "^8.2",
+        "illuminate/database": "^11.0|^12.0",
+        "illuminate/support": "^11.0|^12.0",
+        "spatie/laravel-translatable": "^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0|^11.0",
+        "orchestra/testbench": "^8.0|^9.0",
+        "illuminate/http": "^11.0|^12.0",
+        "mockery/mockery": "^1.4",
+        "laravel/legacy-factories": "^1.1"
+    },
   "autoload": {
     "psr-4": {
       "MattDaneshvar\\Survey\\": "src/"

@@ -19,7 +19,7 @@ class CreateSurveysTable extends Migration
             $table->json('settings')->nullable();
             $table->timestamps();
 
-            $table->index('name');
+            //$table->index('name');
         });
     }
 
