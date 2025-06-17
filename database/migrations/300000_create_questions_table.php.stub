@@ -21,7 +21,7 @@ class CreateQuestionsTable extends Migration
             $table->string('type')->default('text');
             $table->json('options')->nullable();
             $table->json('rules')->nullable();
-            $table->integer('order');
+            $table->integer('order_column');
             $table->timestamps();
 
             $table->index('survey_id');
